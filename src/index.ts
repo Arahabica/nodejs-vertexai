@@ -364,7 +364,15 @@ export class GenerativeModel {
         throw new Error('did not get a valid response.');
       }
       if (!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
+        const contentType = response.headers.get("content-type");
+        let errorDetail: any;
+        if (contentType && contentType.includes("application/json")) {
+            errorDetail = await response.json();
+        } else {
+            errorDetail = await response.text();
+        }
+        console.log(JSON.stringify({ errorDetail }));
+        throw new Error(`${response.status} ${response.statusText} - ${JSON.stringify(errorDetail)}`);
       }
     } catch (e) {
       console.log(e);
@@ -395,7 +403,15 @@ export class GenerativeModel {
         throw new Error('did not get a valid response.');
       }
       if (!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
+        const contentType = response.headers.get("content-type");
+        let errorDetail: any;
+        if (contentType && contentType.includes("application/json")) {
+            errorDetail = await response.json();
+        } else {
+            errorDetail = await response.text();
+        }
+        console.log(JSON.stringify({ errorDetail }));
+        throw new Error(`${response.status} ${response.statusText} - ${JSON.stringify(errorDetail)}`);
       }
     } catch (e) {
       console.log(e);
