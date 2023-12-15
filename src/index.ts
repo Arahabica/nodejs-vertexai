@@ -309,12 +309,11 @@ export class GenerativeModel {
         throw new Error('did not get a valid response.');
       }
       if (!response.ok) {
-        const contentType = response.headers.get("content-type");
         let errorDetail: any;
-        if (contentType && contentType.includes("application/json")) {
-            errorDetail = await response.json();
-        } else {
-            errorDetail = await response.text();
+        try {
+          errorDetail = await response.json();
+        } catch (jsonError) {
+          errorDetail = await response.text();
         }
         console.log(JSON.stringify({ errorDetail }));
         throw new Error(`${response.status} ${response.statusText} - ${JSON.stringify(errorDetail)}`);
@@ -364,12 +363,11 @@ export class GenerativeModel {
         throw new Error('did not get a valid response.');
       }
       if (!response.ok) {
-        const contentType = response.headers.get("content-type");
         let errorDetail: any;
-        if (contentType && contentType.includes("application/json")) {
-            errorDetail = await response.json();
-        } else {
-            errorDetail = await response.text();
+        try {
+          errorDetail = await response.json();
+        } catch (jsonError) {
+          errorDetail = await response.text();
         }
         console.log(JSON.stringify({ errorDetail }));
         throw new Error(`${response.status} ${response.statusText} - ${JSON.stringify(errorDetail)}`);
@@ -403,12 +401,11 @@ export class GenerativeModel {
         throw new Error('did not get a valid response.');
       }
       if (!response.ok) {
-        const contentType = response.headers.get("content-type");
         let errorDetail: any;
-        if (contentType && contentType.includes("application/json")) {
-            errorDetail = await response.json();
-        } else {
-            errorDetail = await response.text();
+        try {
+          errorDetail = await response.json();
+        } catch (jsonError) {
+          errorDetail = await response.text();
         }
         console.log(JSON.stringify({ errorDetail }));
         throw new Error(`${response.status} ${response.statusText} - ${JSON.stringify(errorDetail)}`);
