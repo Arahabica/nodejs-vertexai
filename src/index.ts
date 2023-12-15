@@ -309,8 +309,14 @@ export class GenerativeModel {
         throw new Error('did not get a valid response.');
       }
       if (!response.ok) {
-        console.log(JSON.stringify({ errorResponse: response }));
-        throw new Error(`${response.status} ${response.statusText}`);
+        let errorData: any
+        try {
+          errorData = await response.json();
+        } catch (e) {
+          errorData = { body: response.body }
+        }
+        console.log(JSON.stringify({ errorData }));
+        throw new Error(`${response.status} ${response.statusText} - ${JSON.stringify(errorData)}`);
       }
     } catch (e) {
       console.log(e);
