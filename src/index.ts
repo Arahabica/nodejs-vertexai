@@ -309,6 +309,7 @@ export class GenerativeModel {
         throw new Error('did not get a valid response.');
       }
       if (!response.ok) {
+        console.log(JSON.stringify({ errorResponse: response }));
         throw new Error(`${response.status} ${response.statusText}`);
       }
     } catch (e) {
